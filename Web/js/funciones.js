@@ -93,14 +93,18 @@ function cargarCoordenadas(id) {
                  Posicion = id1
                  */
                 var myLatLng = null;
+                if (!isEmpty(actual) && index == "id1") {
+                    myLatLng = {lat: value.lat, lng: value.lng};
+                    setMarker(value.nombre, myLatLng, index);
+                }
                 if ($("#enCamino").val() == 0) {
-                    if (index != "id2") {
+                    if (index == "id3") {
                         myLatLng = {lat: value.lat, lng: value.lng};
                         setMarker(value.nombre, myLatLng, index);
                     }
                 }
                 else {
-                    if (index != "id3") {
+                    if (index == "id2") {
                         myLatLng = {lat: value.lat, lng: value.lng};
                         setMarker(value.nombre, myLatLng, index);
                     }
