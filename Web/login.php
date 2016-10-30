@@ -10,7 +10,7 @@ if (!isset($_SESSION)) {
 }
 ?>
 <script>
-    var segundos = 6;
+    var segundos = 3;
     $(function () {
         setInterval(function () {
             $("#splashScreen").hide();
