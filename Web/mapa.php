@@ -13,6 +13,7 @@ if (!isset($_SESSION)) {
     <div class="row">
         <a class="btn btn-default" onclick="logout()">Cerrar Sesión</a>
         <a class="btn btn-default" onclick="websocket()">WebSocket</a>
+        <a class="btn btn-default" onclick="distancia()">Obtener Distancia</a>
     </div>
     <div id="users" class="row"></div>
 </form>
@@ -25,7 +26,7 @@ if (!isset($_SESSION)) {
     $(function () {
         cargarUsuarios();
         initMap();
-        cargarCoordenadas(<?php echo $_SESSION["usuario"]?>)
+        cargarCoordenadas(<?php echo $_SESSION["usuario"]?>);
         setInterval(function () {
             cargarCoordenadas(<?php echo $_SESSION["usuario"]?>)
         }, segundos * 1000);

@@ -1,6 +1,9 @@
 /**
  * Created by Memo on 04/jun/2016.
  */
+var markers = [];
+var map;
+
 function ingresar() {
     var user = $("#txtUser").val();
     var pass = $("#txtPass").val();
@@ -35,10 +38,10 @@ function logout() {
         }
     )
 }
-var markers = [];
-var map;
 function cargarCoordenadas(id) {
     setMapOnAll(null);
+    var directionsService = new google.maps.DirectionsService;
+    var directionsDisplay = new google.maps.DirectionsRenderer;
     $.post(
         "ajax.php",
         {
@@ -47,7 +50,10 @@ function cargarCoordenadas(id) {
         },
         function (out) {
             var obj = JSON.parse(out);
-
+            $.each(obj, function (index, value) {
+                var myLatLng = {lat: value.lat, lng: value.lng};
+                calculateAndDisplayRoute(directionsService, directionsDisplay, myLatLng);
+            });
             $.each(obj, function (index, value) {
                 var myLatLng = {lat: value.lat, lng: value.lng};
                 setMarker(value.nombre, myLatLng);
@@ -55,6 +61,7 @@ function cargarCoordenadas(id) {
 
         }
     )
+
 }
 function setMapOnAll(map) {
     for (var i = 0; i < markers.length; i++) {
@@ -74,6 +81,21 @@ function setMarker(label, myLatLng) {
     markers.push(marker);
     marker.setMap(map);
     map.setCenter(marker.getPosition());
+}
+function calculateAndDisplayRoute(directionsService, directionsDisplay, myLatLng) {
+    initMap();
+    directionsDisplay.setMap(map);
+    directionsService.route({
+        origin: myLatLng.lat + "," + myLatLng.lng,
+        destination: '21.1675228,-101.712523',
+        travelMode: google.maps.TravelMode.DRIVING
+    }, function (response, status) {
+        if (status === google.maps.DirectionsStatus.OK) {
+            directionsDisplay.setDirections(response);
+        } else {
+            window.alert('Directions request failed due to ' + status);
+        }
+    });
 }
 function cargarUsuarios() {
     $.post(
@@ -100,4 +122,17 @@ function focusMarker(id) {
 }
 function websocket() {
     $("#frmSocket").submit();
+}
+function distancia() {
+    $.post(
+        "ajax.php",
+        {
+            ajaxAccion: "getDistancia"
+        },
+        function (out) {
+            var vars = JSON.parse(out);
+            console.log(vars);
+            alert("Distancia: " + vars.rows[0].elements[0].distance.text + " Tiempo: " + vars.rows[0].elements[0].duration.text);
+        }
+    )
 }
