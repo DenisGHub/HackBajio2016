@@ -140,7 +140,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, myLatLng
             window.alert('Directions request failed due to ' + status);
         }
     });
-    distancia();
+    distancia(myLatLng, destination);
 }
 function cargarUsuarios() {
     $.post(
@@ -168,11 +168,13 @@ function focusMarker(id) {
 function websocket() {
     $("#frmSocket").submit();
 }
-function distancia() {
+function distancia(origin, dest) {
     $.post(
         "ajax.php",
         {
-            ajaxAccion: "getDistancia"
+            ajaxAccion: "getDistancia",
+            origin: origin,
+            dest: dest
         },
         function (out) {
             var vars = JSON.parse(out);

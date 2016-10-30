@@ -69,8 +69,8 @@ function hexToStr($hex)
 function getDistancia()
 {
     $apiKey = "AIzaSyAf0sWyWt1ZsHRAGCQGhKeeGgbT9V0kpBU";
-    $origins = "21.159123,-101.707513";//Camion
-    $destinations = "21.1675228,-101.712523";//Actual
+    $origins = $_POST["origin"]["lat"] . "," . $_POST["origin"]["lng"];//Camion
+    $destinations = $_POST["dest"]["lat"] . "," . $_POST["dest"]["lng"];//Actual
     $json = file_get_contents("https://maps.googleapis.com/maps/api/distancematrix/json?origins=$origins&destinations=$destinations&language=es-MX&key=$apiKey");
     return $json;
 }
