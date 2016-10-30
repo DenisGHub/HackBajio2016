@@ -142,7 +142,7 @@ function cargarUsuarios()
     $usuarios = "";
     $consulta = $bd->consulta("SELECT * FROM usuario where nivel_usuario=1");
     foreach ($consulta as $reg) {
-        $usuarios .= '<a class="btn btn-default" onclick="focusMarker(' . $reg["id_usuario"] . ')">' . $reg["nombre_usuario"] . '</a> ';
+        $usuarios .= '<a id="btnId' . $reg["id_usuario"] . '" class="btn btn-default" onclick="mostrarUbicacion(' . $reg["id_usuario"] . ')">' . $reg["nombre_usuario"] . '</a> ';
     }
 
     return $usuarios;

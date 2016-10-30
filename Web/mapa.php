@@ -15,7 +15,7 @@ if (!isset($_SESSION)) {
         <!--<a class="btn btn-default" onclick="websocket()">WebSocket</a>--><!--
         <a class="btn btn-default" onclick="distancia()">Obtener Distancia</a>-->
     </div>
-    <input type="text" value="1">
+    <input type="hidden" value="0" id="ubicacion">
     <div id="users" class="row"></div>
 </form>
 <div class="container">

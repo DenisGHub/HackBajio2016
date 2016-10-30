@@ -83,8 +83,12 @@ function cargarCoordenadas(id) {
                     }
                 }
             });
-            if (!isEmpty(actual)) {
+            if (!isEmpty(actual) && $("#ubicacion").val() == 1) {
                 calculateAndDisplayRoute(directionsService, directionsDisplay, camion, actual);
+            }
+            else {
+                initMap();
+                directionsDisplay.setMap(null);
             }
             $.each(obj, function (index, value) {
                 /*
@@ -93,7 +97,7 @@ function cargarCoordenadas(id) {
                  Posicion = id1
                  */
                 var myLatLng = null;
-                if (!isEmpty(actual) && index == "id1") {
+                if (!isEmpty(actual) && index == "id1" && $("#ubicacion").val() == 1) {
                     myLatLng = {lat: value.lat, lng: value.lng};
                     setMarker(value.nombre, myLatLng, index);
                 }
@@ -194,17 +198,32 @@ function cargarUsuarios() {
         }
     )
 }
+function mostrarUbicacion(id) {
+    var value = $("#ubicacion").val();
+    if (value == 1) {
+        $("#ubicacion").val(0);
+        $("#btnId1").removeClass("btn-primary").addClass("btn-default");
+    }
+    else if (value == 0) {
+        $("#ubicacion").val(1);
+        $("#btnId1").removeClass("btn-default").addClass("btn-primary");
+    }
+    cargarCoordenadas(id);
+}
 function focusMarker(id) {
-    $.post(
-        "ajax.php",
-        {
-            ajaxAccion: "focusMarker",
-            id: id
-        },
-        function (out) {
-            cargarCoordenadas(id);
-        }
-    )
+    console.log(id);
+    if (id == 1) {
+        $.post(
+            "ajax.php",
+            {
+                ajaxAccion: "focusMarker",
+                id: id
+            },
+            function (out) {
+                cargarCoordenadas(id);
+            }
+        )
+    }
 }
 function websocket() {
     $("#frmSocket").submit();
