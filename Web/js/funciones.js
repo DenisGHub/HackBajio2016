@@ -141,8 +141,10 @@ function setMarker(label, myLatLng, index) {
     var icon;
     if (index == "id1") {
         icon = {
-            path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-            scale: 10
+            url: "img/IND-MI-UBICACION.png",
+            scaledSize: new google.maps.Size(50, 100), // scaled size
+            origin: new google.maps.Point(0, 0), // origin
+            anchor: new google.maps.Point(25, 25) // anchor
         };
     }
     else if (index == "id2") {
