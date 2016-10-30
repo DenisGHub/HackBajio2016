@@ -17,7 +17,7 @@ if (!isset($_SESSION)) {
         font-size: 35px;
     }
     h1{
-        font-size: 51px;
+        font-size: 70px;
     }
     hr{
         border-top: 2px solid;
@@ -41,14 +41,15 @@ if (!isset($_SESSION)) {
     width: 200%;
     position: absolute;
     z-index: 10;
+    left:0;
 ">
         <img src="img/LOGO-AMARILLO.png" alt="logo" style="
-    height: 12vh;
+    height: 665px;
     margin-top: 25px;
     position: absolute;
     z-index: 100;
-    left: 4.5vh;
-    top: 7vh;
+    left: 165px;
+    top: 400px;
 ">
     </div>
     <div class="row"><!--
@@ -65,7 +66,7 @@ if (!isset($_SESSION)) {
     </div>
     <div class="row">
         <div class="col-xs-9 col-xs-offset-3">
-            <img src="img/LOGO-SF-GRIS.png" alt="logo" style="height:26%">
+            <img src="img/LOGO-SF-GRIS.png" alt="logo" style="height:445px">
         </div>
         <div class="col-xs-12">
             <h1 style="color:#99FF00;text-align: center;font-weight: bold;">Gracias por permitirnos ser parte de tu vida</h1>
