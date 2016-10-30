@@ -10,23 +10,19 @@ session_start();
 <html>
 <head>
     <title>Urban-lora</title>
-    <style type="text/css">
-    body { background-size: cover;
-	background-image: url(img/FONDO-MAMALON.png);
-   
-}
-    </style>
+    <!--<style type="text/css">
+        body {
+            background-size: cover;
+            background-image: url(img/FONDO-MAMALON.png);
+        }
+    </style>-->
     <?php include "scripts.php" ?>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 <body style="
     overflow-x: hidden;
     overflow-y: auto;
 ">
-<h3>&nbsp;</h3>
-<div class="col-sm-8 col-sm-offset-3" style="position: relative"><img src="img/LOGO-AMARILLO.png" alt="" width="410" height="400" onClick= "location.href='2.php'"></div>
-
-
 <?php
 
 if (!isset($_SESSION["usuario"])) {

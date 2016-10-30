@@ -10,7 +10,7 @@ if (!isset($_SESSION)) {
 }
 ?>
 <script>
-    var segundos = 3;
+    var segundos = 6;
     $(function () {
         setInterval(function () {
             $("#splashScreen").hide();
@@ -22,11 +22,19 @@ if (!isset($_SESSION)) {
 </form>
 <div class="form-horizontal">
     <div id="splashScreen">
-        <img src="images/bus.png" alt="splash" style="
-    height: 20vh;
+        <img src="img/FONDO-MAMALON.png" alt="fondo" style="
+    height: 37vh;
+    position: absolute;
+    width: 45vh;
+    z-index: 10;
+">
+        <img src="img/LOGO-AMARILLO.png" alt="logo" style="
+    height: 12vh;
     margin-top: 25px;
     position: absolute;
     z-index: 100;
+    left: 4.5vh;
+    top: 7vh;
 ">
     </div>
     <div class="row"><!--
