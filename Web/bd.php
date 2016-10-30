@@ -17,9 +17,9 @@ class bd
     public function __construct()
     {
         $this->host = "localhost";
-        $this->user = "root";
+        $this->user = "id122427_root";
         $this->pass = "sqlserver";
-        $this->bd = "gpsandroid";
+        $this->bd = "id122427_gpsandroid";
         $this->conexion = $this->conectar();
 
     }
