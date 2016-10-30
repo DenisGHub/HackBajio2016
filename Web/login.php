@@ -65,15 +65,15 @@ if (!isset($_SESSION)) {
     </div>
     <div class="row">
         <div class="col-xs-9 col-xs-offset-3">
-            <img src="img/LOGO-SF-GRIS.png" alt="logo" style="height:20%">
+            <img src="img/LOGO-SF-GRIS.png" alt="logo" style="height:26%">
         </div>
         <div class="col-xs-12">
-            <h1 style="color:#99FF00">Gracias por permitirnos ser parte de tu vida</h1>
+            <h1 style="color:#99FF00;text-align: center;font-weight: bold;">Gracias por permitirnos ser parte de tu vida</h1>
         </div>
     </div>
     <div class="row">
         <div class="col-xs-4 col-xs-offset-1">
-            <img src="img/VEC-CAMION-GRIS.png" alt="camion" style="height:9%">
+            <img src="img/VEC-CAMION-GRIS.png" alt="camion" style="height:120px">
         </div>
         <div class="col-xs-6">
             <p>Conocer las rutas urbanas sera fácil</p>
@@ -82,7 +82,7 @@ if (!isset($_SESSION)) {
     <hr>
     <div class="row">
         <div class="col-xs-4 col-xs-offset-1">
-            <img src="img/VEC-RELOJ.png" alt="camion" style="height:9%">
+            <img src="img/VEC-RELOJ.png" alt="camion" style="height:120px">
         </div>
         <div class="col-xs-6">
             <p>No te preocuparas por perder el camion</p>
@@ -91,15 +91,15 @@ if (!isset($_SESSION)) {
     <hr>
     <div class="row">
         <div class="col-xs-4 col-xs-offset-1">
-            <img src="img/VEC-RUTA-VACIO.emf" alt="camion" style="height:9%">
+            <img src="img/VEC-RUTA-VACIO.png" alt="camion" style="height:120px">
         </div>
         <div class="col-xs-6">
             <p>No te preocuparas por perder el camion</p>
         </div>
     </div>
     <hr>
-    <div class="col-xs-2 col-xs-offset-5">
-        <a id="btnIngresar" class="btn btn-primary col-xs-12" onclick="ingresar()">CONTINUAR</a>
+    <div class="col-xs-8 col-xs-offset-2">
+        <a id="btnIngresar" class="btn col-xs-12" onclick="ingresar()"><img style="height: 55px;" src="img/BTN-CONTINUAR.png" alt="continuar"></a>
     </div>
     <div class="col-xs-12" style="text-align: center">
         <label id="lblEstatus"></label>
