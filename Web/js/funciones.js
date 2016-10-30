@@ -42,6 +42,14 @@ function cargarCoordenadas(id) {
     setMapOnAll(null);
     var directionsService = new google.maps.DirectionsService;
     var directionsDisplay = new google.maps.DirectionsRenderer;
+
+    var actual = {};
+    navigator.geolocation.getCurrentPosition(function (location) {
+
+        actual.lat = location.coords.latitude;
+        actual.lng = location.coords.longitude;
+    });
+
     $.post(
         "ajax.php",
         {
@@ -50,16 +58,18 @@ function cargarCoordenadas(id) {
         },
         function (out) {
             var obj = JSON.parse(out);
-            var actual, camion;
+            var camion;
             $.each(obj, function (index, value) {
                 /*
                  Camion = id3
                  Parada = id2
                  Posicion = id1
                  */
+                if (id == 3) {
+                    actual = {lat: value.lat, lng: value.lng};
+                }
                 if ($("#enCamino").val() == 0) {
                     if (index == "id1") {
-                        actual = {lat: value.lat, lng: value.lng};
                     }
                     else if (index == "id3") {
                         camion = {lat: value.lat, lng: value.lng};
@@ -70,11 +80,12 @@ function cargarCoordenadas(id) {
                         camion = {lat: value.lat, lng: value.lng};
                     }
                     else if (index == "id2") {
-                        actual = {lat: value.lat, lng: value.lng};
                     }
                 }
             });
-            calculateAndDisplayRoute(directionsService, directionsDisplay, camion, actual);
+            if (!isEmpty(actual)) {
+                calculateAndDisplayRoute(directionsService, directionsDisplay, camion, actual);
+            }
             $.each(obj, function (index, value) {
                 /*
                  Camion = id3
@@ -100,6 +111,14 @@ function cargarCoordenadas(id) {
     )
 
 }
+function isEmpty(obj) {
+    for (var prop in obj) {
+        if (obj.hasOwnProperty(prop))
+            return false;
+    }
+
+    return true;
+}
 function setMapOnAll(map) {
     for (var i = 0; i < markers.length; i++) {
         markers[i].setMap(map);
@@ -111,6 +130,8 @@ function initMap(label, lat, lng) {
     });
 }
 function setMarker(label, myLatLng, index) {
+    console.log(label + " " + index);
+    console.log(myLatLng);
     var icon;
     if (index == "id1") {
         icon = {
@@ -137,21 +158,26 @@ function setMarker(label, myLatLng, index) {
     map.setCenter(marker.getPosition());
 }
 function calculateAndDisplayRoute(directionsService, directionsDisplay, myLatLng, destination) {
-    initMap();
-    directionsDisplay.setMap(map);
-    directionsDisplay.setOptions({suppressMarkers: true});
-    directionsService.route({
-        origin: myLatLng.lat + "," + myLatLng.lng,
-        destination: destination.lat + "," + destination.lng,
-        travelMode: google.maps.TravelMode.DRIVING
-    }, function (response, status) {
-        if (status === google.maps.DirectionsStatus.OK) {
-            directionsDisplay.setDirections(response);
-        } else {
-            window.alert('Directions request failed due to ' + status);
-        }
-    });
-    distancia(myLatLng, destination);
+    console.log("ruta");
+    console.log(myLatLng);
+    if (!isEmpty(destination)) {
+        initMap();
+        directionsDisplay.setMap(map);
+        directionsDisplay.setOptions({suppressMarkers: true});
+        directionsService.route({
+            origin: myLatLng.lat + "," + myLatLng.lng,
+            destination: destination.lat + "," + destination.lng,
+            travelMode: google.maps.TravelMode.DRIVING
+        }, function (response, status) {
+            if (status === google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(response);
+            } else {
+                window.alert('Directions request failed due to ' + status);
+            }
+        });
+
+        distancia(myLatLng, destination);
+    }
 }
 function cargarUsuarios() {
     $.post(
@@ -180,20 +206,23 @@ function websocket() {
     $("#frmSocket").submit();
 }
 function distancia(origin, dest) {
-    $.post(
-        "ajax.php",
-        {
-            ajaxAccion: "getDistancia",
-            origin: origin,
-            dest: dest
-        },
-        function (out) {
-            var vars = JSON.parse(out);
-            var estimado = "Distancia: " + vars.rows[0].elements[0].distance.text + " Tiempo: " + vars.rows[0].elements[0].duration.text;
-            /*alert();*/
-            $("#ruta").html(estimado);
-        }
-    )
+
+    if (dest != {}) {
+        $.post(
+            "ajax.php",
+            {
+                ajaxAccion: "getDistancia",
+                origin: origin,
+                dest: dest
+            },
+            function (out) {
+                var vars = JSON.parse(out);
+                var estimado = "Distancia: " + vars.rows[0].elements[0].distance.text + " Tiempo: " + vars.rows[0].elements[0].duration.text;
+                /*alert();*/
+                $("#ruta").html(estimado);
+            }
+        )
+    }
 }
 
 var wsUri = "wss://us1.loriot.io/app?id=BE7E0034&token=b6y6qkydnUs7sYey9H3NuA";
@@ -218,7 +247,7 @@ function testWebSocket() {
 
     websocket.onerror = function (evt) {
         onError(evt);
-        console.log(evt);
+
     };
 }
 

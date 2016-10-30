@@ -70,7 +70,10 @@ function getDistancia()
 {
     $apiKey = "AIzaSyAf0sWyWt1ZsHRAGCQGhKeeGgbT9V0kpBU";
     $origins = $_POST["origin"]["lat"] . "," . $_POST["origin"]["lng"];//Camion
-    $destinations = $_POST["dest"]["lat"] . "," . $_POST["dest"]["lng"];//Actual
+    if (!isset($_POST["dest"])) {
+        $destinations = $origins;
+    } else
+        $destinations = $_POST["dest"]["lat"] . "," . $_POST["dest"]["lng"];//Actual
     $json = file_get_contents("https://maps.googleapis.com/maps/api/distancematrix/json?origins=$origins&destinations=$destinations&language=es-MX&key=$apiKey");
     return $json;
 }
@@ -135,10 +138,9 @@ function cargarCoordenadas()
 
 function cargarUsuarios()
 {
-
     global $bd;
     $usuarios = "";
-    $consulta = $bd->consulta("SELECT * FROM usuario");
+    $consulta = $bd->consulta("SELECT * FROM usuario where nivel_usuario=1");
     foreach ($consulta as $reg) {
         $usuarios .= '<a class="btn btn-default" onclick="focusMarker(' . $reg["id_usuario"] . ')">' . $reg["nombre_usuario"] . '</a> ';
     }

@@ -15,6 +15,7 @@ if (!isset($_SESSION)) {
         <!--<a class="btn btn-default" onclick="websocket()">WebSocket</a>--><!--
         <a class="btn btn-default" onclick="distancia()">Obtener Distancia</a>-->
     </div>
+    <input type="text" value="1">
     <div id="users" class="row"></div>
 </form>
 <div class="container">
@@ -33,7 +34,7 @@ if (!isset($_SESSION)) {
         initMap();
         cargarCoordenadas(<?php echo $_SESSION["usuario"]?>);
         setInterval(function () {
-            cargarCoordenadas(<?php echo $_SESSION["usuario"]?>)
+            cargarCoordenadas(<?= $_SESSION["usuario"]?>)
         }, segundos * 1000);
         $('#enCamino').change(function () {
             var value = $(this).val();
