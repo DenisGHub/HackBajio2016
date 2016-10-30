@@ -92,7 +92,7 @@ function setMarker(label, myLatLng, index) {
         icon = {
             url: "images/bus.png",
             scaledSize: new google.maps.Size(50, 50), // scaled size
-            origin: new google.maps.Point(0,0), // origin
+            origin: new google.maps.Point(0, 0), // origin
             anchor: new google.maps.Point(0, 0) // anchor
         };
     }
@@ -159,4 +159,80 @@ function distancia() {
             alert("Distancia: " + vars.rows[0].elements[0].distance.text + " Tiempo: " + vars.rows[0].elements[0].duration.text);
         }
     )
+}
+
+var wsUri = "wss://us1.loriot.io/app?id=BE7E0034&token=b6y6qkydnUs7sYey9H3NuA";
+var output;
+
+function init() {
+    output = document.getElementById("output");
+    testWebSocket();
+    saveOnDB('686f6c61');
+}
+
+function testWebSocket() {
+    websocket = new WebSocket(wsUri);
+
+    websocket.onopen = function (evt) {
+        onOpen(evt);
+    };
+
+    websocket.onmessage = function (evt) {
+        onMessage(evt);
+    };
+
+    websocket.onerror = function (evt) {
+        onError(evt);
+        console.log(evt);
+    };
+}
+
+function onOpen(evt) {
+    console.log("CONNECTED");
+    //doSend("WebSocket rocks");
+}
+
+function onMessage(evt) {
+    console.log(evt);
+    writeToScreen('<span style = "color: blue;">RESPONSE: ' +
+        evt.data + '</span>');
+    websocket.close();
+    saveOnDB(evt.data);
+}
+
+function onError(evt) {
+    writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
+}
+
+function doSend(message) {
+    writeToScreen("SENT: " + message);
+    websocket.send(message);
+}
+
+function writeToScreen(message) {
+    /*var pre = document.createElement("p");
+     pre.style.wordWrap = "break-word";
+     pre.innerHTML = message;
+     output.appendChild(pre);*/
+    alert(message);
+}
+
+window.addEventListener("load", init, false);
+
+function saveOnDB(data) {
+    $.post(
+        "ajax.php",
+        {
+            ajaxAccion: "saveOnDB",
+            data: data
+        },
+        function (out) {
+            var vars = JSON.parse(out);
+            if ($.type(vars.res) === "string") {
+                alert(vars.res);
+            }
+            else {
+                alert("Guardado");
+            }
+        });
 }

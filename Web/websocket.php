@@ -7,9 +7,8 @@
  */
 ?>
 <script>
-    $(function(){
-        alert();
-    })
+    $(function () {
+    });
 </script>
 <form id="frmSocket" action="index.php" method="post">
     <input type="hidden" value="mapa" name="mod">

@@ -28,9 +28,42 @@ if (isset($_POST["ajaxAccion"])) {
             $_SESSION["marker"] = $_POST["id"];
             break;
         case "getDistancia":
-            echo(getDistancia());
+            echo getDistancia();
+            break;
+        case "saveOnDB":
+            echo json_encode(saveOnDB());
             break;
     }
+}
+
+function saveOnDB()
+{
+    $vars = array("res" => true);
+
+    try {
+        global $bd;
+
+        $txt = "select id_coordenada id from coordenada where id_usuario=3";
+        $sql = $bd->consulta($txt);
+        $consulta = $bd->siguiente($sql);
+        $id = $consulta["id"];
+        $coord = hexToStr($_POST["data"]);
+        $txt = "update";
+    } catch (Exception $ex) {
+        $vars["res"] = $ex->getMessage();
+    }
+
+    return $vars;
+}
+
+
+function hexToStr($hex)
+{
+    $string = '';
+    for ($i = 0; $i < strlen($hex) - 1; $i += 2) {
+        $string .= chr(hexdec($hex[$i] . $hex[$i + 1]));
+    }
+    return $string;
 }
 
 function getDistancia()
