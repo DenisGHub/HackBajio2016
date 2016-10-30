@@ -2,6 +2,8 @@ char findString, data, latitud[11],longitud[12];
 
 char sentido[2];
 int contComa = 0, cLT=0, cLN=0,x=0;
+float gLat, sLat, gLon, sLon;
+bool a;
 
 void setup()
 {
@@ -79,26 +81,44 @@ void loop()
     }
   }
   for(int x=0; x<2;x++)
+    {
+    switch(sentido[x]){
+      case 'N':
+      sentido[x]=' ';
+      break;
+      case 'S':
+      sentido[x]='-';
+      break;
+      case 'E':
+      sentido[x]=' ';
+      break;
+      case 'W':
+      sentido[x]='-';
+      break;
+    }
+  }
+  a =!a;
+  if (a == true)
   {
-  switch(sentido[x]){
-    case 'N':
-    sentido[x]=' ';
-    break;
-    case 'S':
-    sentido[x]='-';
-    break;
-    case 'E':
-    sentido[x]=' ';
-    break;
-    case 'W':
-    sentido[x]='-';
-    break;
-  }
-  }
+  gLat = atof(latitud) / 100;
+  sLat = (gLat - floor(gLat)) * 166666;  
   Serial.print(sentido[0]);
-  Serial.print(latitud);
-  Serial.print(",");
-  Serial.print(sentido[1]);
-  Serial.println(longitud);  
+  Serial.print(latitud[0]);
+  Serial.print(latitud[1]);
+  Serial.print(".");
+  Serial.print(sLat, 0);
+  Serial.println(",");  
+  }
 
+  else
+  {
+  Serial.print(sentido[1]);
+  gLon = atof(longitud) / 100;
+  sLon = (gLon - floor(gLon))*166666;  
+  Serial.print(longitud[0]);
+  Serial.print(longitud[1]);
+  Serial.print(longitud[2]);
+  Serial.print(".");
+  Serial.println(sLon, 0);  
+  }
 }
