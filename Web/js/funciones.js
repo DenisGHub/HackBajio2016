@@ -52,11 +52,16 @@ function cargarCoordenadas(id) {
             var obj = JSON.parse(out);
             var actual, camion;
             $.each(obj, function (index, value) {
+                /*
+                 Camion = id3
+                 Parada = id2
+                 Posicion = id1
+                 */
                 if ($("#enCamino").val() == 0) {
                     if (index == "id1") {
                         actual = {lat: value.lat, lng: value.lng};
                     }
-                    else if (index == "id2") {
+                    else if (index == "id3") {
                         camion = {lat: value.lat, lng: value.lng};
                     }
                 }
@@ -64,22 +69,27 @@ function cargarCoordenadas(id) {
                     if (index == "id1") {
                         camion = {lat: value.lat, lng: value.lng};
                     }
-                    else if (index == "id3") {
+                    else if (index == "id2") {
                         actual = {lat: value.lat, lng: value.lng};
                     }
                 }
             });
             calculateAndDisplayRoute(directionsService, directionsDisplay, camion, actual);
             $.each(obj, function (index, value) {
+                /*
+             Camion = id3
+             Parada = id2
+             Posicion = id1
+             */
                 var myLatLng = null;
                 if ($("#enCamino").val() == 0) {
-                    if (index != "id3") {
+                    if (index != "id2") {
                         myLatLng = {lat: value.lat, lng: value.lng};
                         setMarker(value.nombre, myLatLng, index);
                     }
                 }
                 else {
-                    if (index != "id2") {
+                    if (index != "id3") {
                         myLatLng = {lat: value.lat, lng: value.lng};
                         setMarker(value.nombre, myLatLng, index);
                     }
@@ -108,12 +118,12 @@ function setMarker(label, myLatLng, index) {
             scale: 10
         };
     }
-    else if (index == "id2") {
+    else if (index == "id3") {
         icon = {
             url: "images/bus.png",
             scaledSize: new google.maps.Size(50, 50), // scaled size
             origin: new google.maps.Point(0, 0), // origin
-            anchor: new google.maps.Point(0, 0) // anchor
+            anchor: new google.maps.Point(25, 25) // anchor
         };
     }
 
@@ -178,7 +188,6 @@ function distancia(origin, dest) {
         },
         function (out) {
             var vars = JSON.parse(out);
-            console.log(vars);
             var estimado = "Distancia: " + vars.rows[0].elements[0].distance.text + " Tiempo: " + vars.rows[0].elements[0].duration.text;
             /*alert();*/
             $("#ruta").html(estimado);
