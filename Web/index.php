@@ -9,7 +9,7 @@ session_start();
 ?>
 <html>
 <head>
-    <title>Urban-lora</title>
+    <title>UR Lora</title>
     <!--<style type="text/css">
         body {
             background-size: cover;

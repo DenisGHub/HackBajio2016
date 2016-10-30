@@ -9,6 +9,20 @@ if (!isset($_SESSION)) {
     header('Location: index.php');
 }
 ?>
+<style>
+    body{
+        font-family: 'Open Sans Condensed', sans-serif;
+    }
+    p {
+        font-size: 35px;
+    }
+    h1{
+        font-size: 51px;
+    }
+    hr{
+        border-top: 2px solid;
+    }
+</style>
 <script>
     var segundos = 6;
     $(function () {
@@ -20,7 +34,7 @@ if (!isset($_SESSION)) {
 <form id="frmLogin" action="index.php" method="post">
     <input type="hidden" value="mapa" name="mod">
 </form>
-<div class="form-horizontal">
+<div class="form-horizontal container">
     <div id="splashScreen">
         <img src="img/FONDO-MAMALON.png" alt="fondo" style="
     height: 100%;
@@ -50,11 +64,44 @@ if (!isset($_SESSION)) {
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-2 col-xs-offset-5">
-            <a id="btnIngresar" class="btn btn-primary col-xs-12" onclick="ingresar()">CONTINUAR</a>
+        <div class="col-xs-9 col-xs-offset-3">
+            <img src="img/LOGO-SF-GRIS.png" alt="logo" style="height:20%">
         </div>
-        <div class="col-xs-12" style="text-align: center">
-            <label id="lblEstatus"></label>
+        <div class="col-xs-12">
+            <h1 style="color:#99FF00">Gracias por permitirnos ser parte de tu vida</h1>
         </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-4 col-xs-offset-1">
+            <img src="img/VEC-CAMION-GRIS.png" alt="camion" style="height:9%">
+        </div>
+        <div class="col-xs-6">
+            <p>Conocer las rutas urbanas sera fácil</p>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-xs-4 col-xs-offset-1">
+            <img src="img/VEC-RELOJ.png" alt="camion" style="height:9%">
+        </div>
+        <div class="col-xs-6">
+            <p>No te preocuparas por perder el camion</p>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-xs-4 col-xs-offset-1">
+            <img src="img/VEC-RUTA-VACIO.emf" alt="camion" style="height:9%">
+        </div>
+        <div class="col-xs-6">
+            <p>No te preocuparas por perder el camion</p>
+        </div>
+    </div>
+    <hr>
+    <div class="col-xs-2 col-xs-offset-5">
+        <a id="btnIngresar" class="btn btn-primary col-xs-12" onclick="ingresar()">CONTINUAR</a>
+    </div>
+    <div class="col-xs-12" style="text-align: center">
+        <label id="lblEstatus"></label>
     </div>
 </div>
