@@ -32,4 +32,12 @@ if (!isset($_SESSION)) {
         }, segundos * 1000);
     });
 </script>
-<div id="map"></div>
+<div>
+    <div style="height: 60vh">
+        <div id="map">
+        </div>
+    </div>
+    <footer style="position: relative;">
+        <h3 id="ruta"></h3>
+    </footer>
+</div>

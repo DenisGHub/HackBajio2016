@@ -120,6 +120,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, myLatLng
             window.alert('Directions request failed due to ' + status);
         }
     });
+    distancia();
 }
 function cargarUsuarios() {
     $.post(
@@ -156,7 +157,9 @@ function distancia() {
         function (out) {
             var vars = JSON.parse(out);
             console.log(vars);
-            alert("Distancia: " + vars.rows[0].elements[0].distance.text + " Tiempo: " + vars.rows[0].elements[0].duration.text);
+            var estimado = "Distancia: " + vars.rows[0].elements[0].distance.text + " Tiempo: " + vars.rows[0].elements[0].duration.text;
+            /*alert();*/
+            $("#ruta").html(estimado);
         }
     )
 }
@@ -232,7 +235,7 @@ function saveOnDB(data) {
                 alert(vars.res);
             }
             else {
-                alert("Guardado");
+                // alert("Guardado");
             }
         });
 }
