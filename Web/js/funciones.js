@@ -43,7 +43,7 @@ function cargarCoordenadas(id) {
     var directionsService = new google.maps.DirectionsService;
     var directionsDisplay = new google.maps.DirectionsRenderer;
 
-    var actual = {};
+    var actual = {lat: '21.166411', lng: '-101.715622'};
     navigator.geolocation.getCurrentPosition(function (location) {
 
         actual.lat = location.coords.latitude;
@@ -65,9 +65,6 @@ function cargarCoordenadas(id) {
                  Parada = id2
                  Posicion = id1
                  */
-                if (id == 3) {
-                    actual = {lat: value.lat, lng: value.lng};
-                }
                 if ($("#enCamino").val() == 0) {
                     if (index == "id1") {
                     }
@@ -80,6 +77,7 @@ function cargarCoordenadas(id) {
                         camion = {lat: value.lat, lng: value.lng};
                     }
                     else if (index == "id2") {
+                        actual = {lat: value.lat, lng: value.lng};
                     }
                 }
             });
@@ -173,16 +171,17 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, myLatLng
         directionsDisplay.setMap(map);
         directionsDisplay.setOptions({suppressMarkers: true});
         directionsService.route({
-            origin: myLatLng.lat + "," + myLatLng.lng,
-            destination: destination.lat + "," + destination.lng,
-            travelMode: google.maps.TravelMode.DRIVING
-        }, function (response, status) {
-            if (status === google.maps.DirectionsStatus.OK) {
-                directionsDisplay.setDirections(response);
-            } else {
-                window.alert('Directions request failed due to ' + status);
-            }
-        });
+                origin: myLatLng.lat + "," + myLatLng.lng,
+                destination: destination.lat + "," + destination.lng,
+                travelMode: google.maps.TravelMode.DRIVING
+            },
+            function (response, status) {
+                if (status === google.maps.DirectionsStatus.OK) {
+                    directionsDisplay.setDirections(response);
+                } else {
+                    window.alert('Directions request failed due to ' + status);
+                }
+            });
 
         distancia(myLatLng, destination);
     }
