@@ -50,13 +50,20 @@ function cargarCoordenadas(id) {
         },
         function (out) {
             var obj = JSON.parse(out);
+            var actual, camion;
             $.each(obj, function (index, value) {
-                var myLatLng = {lat: value.lat, lng: value.lng};
-                calculateAndDisplayRoute(directionsService, directionsDisplay, myLatLng);
+                if (index == "id1") {
+                    actual = {lat: value.lat, lng: value.lng};
+                }
+                else if (index == "id2") {
+                    camion = {lat: value.lat, lng: value.lng};
+                }
             });
+            calculateAndDisplayRoute(directionsService, directionsDisplay, camion, actual);
+            console.log(obj);
             $.each(obj, function (index, value) {
                 var myLatLng = {lat: value.lat, lng: value.lng};
-                setMarker(value.nombre, myLatLng);
+                setMarker(value.nombre, myLatLng, index);
             });
 
         }
@@ -73,21 +80,38 @@ function initMap(label, lat, lng) {
         zoom: 17
     });
 }
-function setMarker(label, myLatLng) {
+function setMarker(label, myLatLng, index) {
+    var icon;
+    if (index == "id1") {
+        icon = {
+            path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+            scale: 10
+        };
+    }
+    else if (index == "id2") {
+        icon = {
+            url: "images/bus.png",
+            scaledSize: new google.maps.Size(50, 50), // scaled size
+            origin: new google.maps.Point(0,0), // origin
+            anchor: new google.maps.Point(0, 0) // anchor
+        };
+    }
+
     var marker = new google.maps.Marker({
         position: myLatLng,
-        title: label
+        title: label,
+        icon: icon
     });
     markers.push(marker);
     marker.setMap(map);
     map.setCenter(marker.getPosition());
 }
-function calculateAndDisplayRoute(directionsService, directionsDisplay, myLatLng) {
+function calculateAndDisplayRoute(directionsService, directionsDisplay, myLatLng, destination) {
     initMap();
     directionsDisplay.setMap(map);
     directionsService.route({
         origin: myLatLng.lat + "," + myLatLng.lng,
-        destination: '21.1675228,-101.712523',
+        destination: destination.lat + "," + destination.lng,
         travelMode: google.maps.TravelMode.DRIVING
     }, function (response, status) {
         if (status === google.maps.DirectionsStatus.OK) {
