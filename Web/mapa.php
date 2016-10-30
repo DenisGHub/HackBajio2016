@@ -12,8 +12,8 @@ if (!isset($_SESSION)) {
 <form id="frmMapa" action="index.php" method="post" class="container">
     <div class="row">
         <a class="btn btn-default" onclick="logout()">Cerrar Sesión</a>
-        <!--<a class="btn btn-default" onclick="websocket()">WebSocket</a>-->
-        <a class="btn btn-default" onclick="distancia()">Obtener Distancia</a>
+        <!--<a class="btn btn-default" onclick="websocket()">WebSocket</a>--><!--
+        <a class="btn btn-default" onclick="distancia()">Obtener Distancia</a>-->
     </div>
     <div id="users" class="row"></div>
 </form>
