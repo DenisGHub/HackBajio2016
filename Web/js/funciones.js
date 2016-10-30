@@ -52,18 +52,38 @@ function cargarCoordenadas(id) {
             var obj = JSON.parse(out);
             var actual, camion;
             $.each(obj, function (index, value) {
-                if (index == "id1") {
-                    actual = {lat: value.lat, lng: value.lng};
+                if ($("#enCamino").val() == 0) {
+                    if (index == "id1") {
+                        actual = {lat: value.lat, lng: value.lng};
+                    }
+                    else if (index == "id2") {
+                        camion = {lat: value.lat, lng: value.lng};
+                    }
                 }
-                else if (index == "id2") {
-                    camion = {lat: value.lat, lng: value.lng};
+                else {
+                    if (index == "id1") {
+                        camion = {lat: value.lat, lng: value.lng};
+                    }
+                    else if (index == "id3") {
+                        actual = {lat: value.lat, lng: value.lng};
+                    }
                 }
             });
             calculateAndDisplayRoute(directionsService, directionsDisplay, camion, actual);
-            console.log(obj);
             $.each(obj, function (index, value) {
-                var myLatLng = {lat: value.lat, lng: value.lng};
-                setMarker(value.nombre, myLatLng, index);
+                var myLatLng = null;
+                if ($("#enCamino").val() == 0) {
+                    if (index != "id3") {
+                        myLatLng = {lat: value.lat, lng: value.lng};
+                        setMarker(value.nombre, myLatLng, index);
+                    }
+                }
+                else {
+                    if (index != "id2") {
+                        myLatLng = {lat: value.lat, lng: value.lng};
+                        setMarker(value.nombre, myLatLng, index);
+                    }
+                }
             });
 
         }

@@ -17,6 +17,11 @@ if (!isset($_SESSION)) {
     </div>
     <div id="users" class="row"></div>
 </form>
+<div class="container">
+    <div class="row">
+        <input type="text" id="enCamino" value="0">
+    </div>
+</div>
 <form id="frmSocket" action="index.php" method="post" class="container">
     <input type="hidden" value="socket" name="mod">
 </form>
