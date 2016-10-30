@@ -53,8 +53,9 @@ if (!isset($_SESSION)) {
         <div id="map">
         </div>
     </div>
-    <footer style="position: relative;">
-        <h3 id="ruta"></h3>
-    </footer>
     <div id="users" class="row" style="position: relative;text-align: right;right: 70px;bottom: 37px;"></div>
+    <div style="position: relative;color:white">
+        <h3 id="ruta" style="background-color:black;width:420px;"></h3>
+        <div style="height:112px;top:-80px;right:45px;background-color:black;opacity:0.5;position: relative;"></div>
+    </div>
 </div>

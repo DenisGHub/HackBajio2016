@@ -145,6 +145,14 @@ function setMarker(label, myLatLng, index) {
             scale: 10
         };
     }
+    else if (index == "id2") {
+        icon = {
+            url: "img/IND-ESTACION.png",
+            scaledSize: new google.maps.Size(50, 50), // scaled size
+            origin: new google.maps.Point(0, 0), // origin
+            anchor: new google.maps.Point(25, 25) // anchor
+        };
+    }
     else if (index == "id3") {
         icon = {
             url: "images/bus.png",
