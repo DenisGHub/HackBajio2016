@@ -77,10 +77,10 @@ function cargarCoordenadas(id) {
             calculateAndDisplayRoute(directionsService, directionsDisplay, camion, actual);
             $.each(obj, function (index, value) {
                 /*
-             Camion = id3
-             Parada = id2
-             Posicion = id1
-             */
+                 Camion = id3
+                 Parada = id2
+                 Posicion = id1
+                 */
                 var myLatLng = null;
                 if ($("#enCamino").val() == 0) {
                     if (index != "id2") {
@@ -139,6 +139,7 @@ function setMarker(label, myLatLng, index) {
 function calculateAndDisplayRoute(directionsService, directionsDisplay, myLatLng, destination) {
     initMap();
     directionsDisplay.setMap(map);
+    directionsDisplay.setOptions({suppressMarkers: true});
     directionsService.route({
         origin: myLatLng.lat + "," + myLatLng.lng,
         destination: destination.lat + "," + destination.lng,
