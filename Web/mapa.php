@@ -19,7 +19,7 @@ if (!isset($_SESSION)) {
 </form>
 <div class="container">
     <div class="row">
-        <input type="text" id="enCamino" value="0">
+        <input data-toggle="toggle" type="checkbox" id="enCamino" value="0">
     </div>
 </div>
 <form id="frmSocket" action="index.php" method="post" class="container">
@@ -35,6 +35,15 @@ if (!isset($_SESSION)) {
         setInterval(function () {
             cargarCoordenadas(<?php echo $_SESSION["usuario"]?>)
         }, segundos * 1000);
+        $('#enCamino').change(function () {
+            var value = $(this).val();
+            if (value == 0) {
+                $(this).val(1);
+            }
+            else if (value == 1) {
+                $(this).val(0);
+            }
+        });
     });
 </script>
 <div>
