@@ -47,11 +47,15 @@ function saveOnDB()
         $sql = $bd->consulta($txt);
         $consulta = $bd->siguiente($sql);
         $id = $consulta["id"];
-        $coord = explode(",", hexToStr($_POST["data"]));
-        if (count($coord) == 2) {
-            $lat = $coord[0];
-            $lon = $coord[1];
-            $txt = "update coordenada set latitud_coordenada=$lat, longitud_coordenada=$lon where id_coordenada=$id";
+        $coord = hexToStr($_POST["data"]);
+        if ($coord[0] == "A") {
+            $coord = substr($coord, 1);
+            $txt = "update coordenada set latitud_coordenada=$coord where id_coordenada=$id";
+            $sql = $bd->consulta($txt);
+        }
+        if ($coord[0] == "O") {
+            $coord = substr($coord, 1);
+            $txt = "update coordenada set longitud_coordenada = $coord where id_coordenada=$id";
             $sql = $bd->consulta($txt);
         }
     } catch (Exception $ex) {

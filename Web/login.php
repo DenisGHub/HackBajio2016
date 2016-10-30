@@ -23,9 +23,9 @@ if (!isset($_SESSION)) {
 <div class="form-horizontal">
     <div id="splashScreen">
         <img src="img/FONDO-MAMALON.png" alt="fondo" style="
-    height: 37vh;
+    height: 100%;
+    width: 200%;
     position: absolute;
-    width: 45vh;
     z-index: 10;
 ">
         <img src="img/LOGO-AMARILLO.png" alt="logo" style="
@@ -38,22 +38,22 @@ if (!isset($_SESSION)) {
 ">
     </div>
     <div class="row"><!--
-        <label for="txtUser" class="col-md-1 col-md-offset-4 control-label">Usuario:</label>-->
-        <div class="col-md-3">
+        <label for="txtUser" class="col-xs-1 col-xs-offset-4 control-label">Usuario:</label>-->
+        <div class="col-xs-3">
             <input id="txtUser" name="usuario" type="hidden" class="form-control" value="Posicion Actual">
         </div>
     </div>
     <div class="row"><!--
-        <label for="txtpass" class="col-md-1 col-md-offset-4 control-label">Password:</label>-->
-        <div class="col-md-3">
+        <label for="txtpass" class="col-xs-1 col-xs-offset-4 control-label">Password:</label>-->
+        <div class="col-xs-3">
             <input id="txtPass" name="password" type="hidden" class="form-control" value="cachu">
         </div>
     </div>
     <div class="row">
-        <div class="col-md-2 col-md-offset-5">
-            <a id="btnIngresar" class="btn btn-primary col-md-12" onclick="ingresar()">Ingresar</a>
+        <div class="col-xs-2 col-xs-offset-5">
+            <a id="btnIngresar" class="btn btn-primary col-xs-12" onclick="ingresar()">CONTINUAR</a>
         </div>
-        <div class="col-md-12" style="text-align: center">
+        <div class="col-xs-12" style="text-align: center">
             <label id="lblEstatus"></label>
         </div>
     </div>
