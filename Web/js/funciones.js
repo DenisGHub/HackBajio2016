@@ -280,11 +280,9 @@ function onOpen(evt) {
 }
 
 function onMessage(evt) {
-    console.log(evt);
-    writeToScreen('<span style = "color: blue;">RESPONSE: ' +
-        evt.data + '</span>');
-    websocket.close();
-    saveOnDB(evt.data);
+    var obj = JSON.parse(evt.data);
+    console.log(obj);
+    saveOnDB(obj.data);
 }
 
 function onError(evt) {
